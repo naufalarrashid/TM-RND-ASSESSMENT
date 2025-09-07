@@ -1,8 +1,18 @@
-# TM R&D Assessment - Angular Application
+# 🚀 TM R&D Assessment - Angular Application
 
-## 📋 Project Overview
+**Project Title:** TM R&D Assessment - Full-Stack Angular Web Application
 
-This is a comprehensive Angular application developed for the TM R&D Assessment, featuring a modern web interface with authentication, product management, and detailed reporting capabilities.
+## 📋 Project Description
+
+This is a comprehensive Angular application developed for the TM R&D Assessment, featuring a modern web interface with authentication, product management, and detailed reporting capabilities. The application demonstrates full-stack development skills with Angular 18+, TypeScript, and modern web technologies.
+
+**Key Features:**
+- Secure JWT authentication system
+- Product management with CRUD operations
+- Real-time data filtering and pagination
+- Responsive design with dark/light mode
+- API integration with TM R&D endpoints
+- Professional UI/UX with modern styling
 
 ## 👨‍💻 Author
 
@@ -195,29 +205,49 @@ Navigate to `http://localhost:4200/`
 ng build --configuration production
 ```
 
-## 🌐 Deployment
+## 🌐 Deployment Guide
 
 ### Live Demo
 **Demo URL**: [https://tm-rnd-assessment.vercel.app](https://tm-rnd-assessment.vercel.app)
 
-### Deployment Guide
-For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
+### Deployment Steps
 
-### Quick Deploy Options
-
-#### Vercel (Recommended)
+#### 1. Build the Application
 ```bash
-npm install -g vercel
-vercel login
-vercel
+ng build --configuration production
 ```
 
-#### Netlify
-```bash
-npm install -g netlify-cli
-netlify login
-netlify deploy --prod --dir=dist/tm-rnd-assessment
-```
+#### 2. Deploy to Vercel
+1. **Install Vercel CLI:**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Login to Vercel:**
+   ```bash
+   vercel login
+   ```
+
+3. **Deploy:**
+   ```bash
+   vercel
+   ```
+
+4. **Configure Vercel Settings:**
+   - **Framework Preset:** Angular
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist/tm-rnd-assessment/browser`
+   - **Install Command:** `npm install`
+
+#### 3. Environment Configuration
+- No environment variables required
+- API endpoints are configured in the application code
+- CORS is handled by the TM R&D API endpoints
+
+#### 4. Post-Deployment
+- Verify the application loads correctly
+- Test authentication flow
+- Confirm all features work as expected
 
 ## 🧪 Testing
 
