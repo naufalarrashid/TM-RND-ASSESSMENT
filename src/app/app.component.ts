@@ -19,7 +19,7 @@ import { RouterOutlet } from '@angular/router'; // Router outlet for navigation
  * 
  * This decorator defines the component metadata:
  * - selector: 'app-root' - How this component is used in HTML (<app-root>)
- * - standalone: true - This is a standalone component (Angular 17+ feature)
+ * - standalone: true - This is a standalone component (Angular 18+ feature)
  * - imports: [RouterOutlet] - Dependencies this component needs
  * - templateUrl: Points to the HTML template file
  * - styleUrls: Points to the CSS style files

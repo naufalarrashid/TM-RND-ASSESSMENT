@@ -4,7 +4,7 @@
  * Project: TM R&D Assessment
  * Description: Main entry point for the Angular application
  * Features:
- * - Standalone application bootstrap (Angular 17+)
+ * - Standalone application bootstrap (Angular 18+)
  * - Application configuration loading
  * - Error handling for bootstrap failures
  */

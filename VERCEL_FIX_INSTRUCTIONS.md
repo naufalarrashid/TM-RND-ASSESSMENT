@@ -1,7 +1,7 @@
 # 🚨 URGENT: Fix Vercel 404 Error
 
 ## The Problem
-Your Angular 17+ app builds to `dist/tm-rnd-assessment/browser/` but Vercel is looking in the wrong directory.
+Your Angular 18+ app builds to `dist/tm-rnd-assessment/browser/` but Vercel is looking in the wrong directory.
 
 ## ✅ SOLUTION: Update Vercel Dashboard Settings
 
@@ -23,7 +23,7 @@ Your Angular 17+ app builds to `dist/tm-rnd-assessment/browser/` but Vercel is l
 - Test your app - 404 should be GONE!
 
 ## 🎯 Why This Fixes It
-- Angular 17+ creates a `browser` subdirectory
+- Angular 18+ creates a `browser` subdirectory
 - Vercel was looking in `dist/tm-rnd-assessment/` (wrong)
 - Now it will look in `dist/tm-rnd-assessment/browser/` (correct)
 

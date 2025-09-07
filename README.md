@@ -107,7 +107,7 @@ This is a comprehensive Angular application developed for the TM R&D Assessment,
 
 ## 🛠️ Technical Stack
 
-- **Frontend Framework**: Angular 17+ (Standalone Components)
+- **Frontend Framework**: Angular 18+ (Standalone Components)
 - **Styling**: CSS3 with CSS Custom Properties (CSS Variables)
 - **State Management**: RxJS Observables
 - **HTTP Client**: Angular HttpClient
@@ -198,7 +198,7 @@ ng build --configuration production
 ## 🌐 Deployment
 
 ### Live Demo
-**Demo URL**: [Your deployment URL will be added here]
+**Demo URL**: [https://tm-rnd-assessment.vercel.app](https://tm-rnd-assessment.vercel.app)
 
 ### Deployment Guide
 For detailed deployment instructions, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)

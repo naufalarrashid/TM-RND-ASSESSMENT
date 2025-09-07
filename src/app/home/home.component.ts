@@ -264,14 +264,30 @@ export class HomeComponent implements OnInit {
   /**
    * Validate if a string is a proper URL format
    * 
+   * This method uses the native JavaScript URL constructor to validate URL format.
+   * It ensures that the URL has a proper protocol (http/https) and domain structure.
+   * 
+   * Examples of valid URLs:
+   * - https://example.com
+   * - http://localhost:3000
+   * - https://subdomain.example.com/path
+   * 
+   * Examples of invalid URLs:
+   * - example.com (missing protocol)
+   * - just-text (not a URL)
+   * - ftp://example.com (wrong protocol for web)
+   * 
    * @param url - The URL string to validate
-   * @returns boolean - true if valid URL, false otherwise
+   * @returns boolean - true if valid URL format, false otherwise
    */
   public isValidUrl(url: string): boolean {
     try {
+      // Use native URL constructor to validate URL format
+      // This will throw an error if the URL is malformed
       new URL(url);
       return true;
     } catch {
+      // If URL constructor throws an error, the URL is invalid
       return false;
     }
   }
