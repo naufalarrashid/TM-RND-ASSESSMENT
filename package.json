@@ -1,0 +1,51 @@
+{
+  "_comment": "===== TM R&D ASSESSMENT - PACKAGE CONFIGURATION =====",
+  "_author": "Naufal Arrashid",
+  "_project": "TM R&D Assessment",
+  "_description": "Angular application package configuration with dependencies and build scripts",
+  
+  "name": "tm-rnd-assessment",
+  "version": "0.0.0",
+  
+  "_scripts_comment": "Build and development scripts for the Angular application",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --configuration production",
+    "build:dev": "ng build --configuration development",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless"
+  },
+  
+  "private": true,
+  
+  "_dependencies_comment": "Production dependencies required to run the application",
+  "dependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/forms": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/router": "^19.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  
+  "_devDependencies_comment": "Development dependencies for building, testing, and development tools",
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.4",
+    "@angular/cli": "^19.2.4",
+    "@angular/compiler-cli": "^19.2.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.7.2"
+  }
+}

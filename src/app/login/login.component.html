@@ -1,0 +1,85 @@
+<div class="login-container">
+  <!-- Theme Toggle -->
+  <div class="theme-toggle-container">
+    <app-theme-toggle></app-theme-toggle>
+  </div>
+  
+  <div class="login-card">
+    <div class="login-header">
+      <h2 class="login-title">Welcome Back</h2>
+      <p class="login-subtitle">Please sign in to your account</p>
+    </div>
+    
+    <form class="login-form" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
+        <input 
+          id="username" 
+          type="text" 
+          [(ngModel)]="username" 
+          name="username"
+          #usernameInput="ngModel"
+          class="form-input" 
+          [class.error]="usernameInput.invalid && usernameInput.touched"
+          [class.success]="usernameInput.valid && usernameInput.touched"
+          placeholder="Enter your username"
+          required
+          minlength="3"
+          (input)="validateForm()"
+        />
+        <div class="validation-message" *ngIf="usernameInput.invalid && usernameInput.touched">
+          <span *ngIf="usernameInput.errors?.['required']" class="error-text">Username is required</span>
+          <span *ngIf="usernameInput.errors?.['minlength']" class="error-text">Username must be at least 3 characters</span>
+        </div>
+        <div class="validation-message" *ngIf="usernameInput.valid && usernameInput.touched">
+          <span class="success-text">✅ Username looks good</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input 
+          id="password" 
+          type="password" 
+          [(ngModel)]="password" 
+          name="password"
+          #passwordInput="ngModel"
+          class="form-input" 
+          [class.error]="passwordInput.invalid && passwordInput.touched"
+          [class.success]="passwordInput.valid && passwordInput.touched"
+          placeholder="Enter your password"
+          required
+          minlength="6"
+          (input)="validateForm()"
+        />
+        <div class="validation-message" *ngIf="passwordInput.invalid && passwordInput.touched">
+          <span *ngIf="passwordInput.errors?.['required']" class="error-text">Password is required</span>
+          <span *ngIf="passwordInput.errors?.['minlength']" class="error-text">Password must be at least 6 characters</span>
+        </div>
+        <div class="validation-message" *ngIf="passwordInput.valid && passwordInput.touched">
+          <span class="success-text">✅ Password looks good</span>
+        </div>
+      </div>
+      
+      <button 
+        type="submit" 
+        class="login-button"
+        [disabled]="isLoading"
+        [class.loading]="isLoading"
+      >
+        <span *ngIf="!isLoading">Sign In</span>
+        <span *ngIf="isLoading" class="loading-spinner">Signing In...</span>
+      </button>
+    </form>
+    
+    <div *ngIf="loginMessage" class="message" [class.success]="loginMessage.includes('successful')" [class.error]="loginMessage.includes('Invalid')">
+      {{ loginMessage }}
+    </div>
+    
+    <div class="login-footer">
+      <p class="api-info">
+        <strong>API Integration:</strong> This form connects to the TM R&D authentication API
+      </p>
+    </div>
+  </div>
+</div>
