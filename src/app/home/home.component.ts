@@ -250,13 +250,13 @@ export class HomeComponent implements OnInit {
    */
   validateAddForm(): void {
     // Check if product name is valid (minimum 2 characters)
-    const isProductNameValid = this.newProduct.productName && 
-                              this.newProduct.productName.length >= 2;
+    const isProductNameValid = !!(this.newProduct.productName && 
+                                 this.newProduct.productName.length >= 2);
     
     // Check if URL is valid (must be a proper URL format)
-    const isUrlValid = this.newProduct.url && 
-                      this.newProduct.url.length > 0 &&
-                      this.isValidUrl(this.newProduct.url);
+    const isUrlValid = !!(this.newProduct.url && 
+                         this.newProduct.url.length > 0 &&
+                         this.isValidUrl(this.newProduct.url));
     
     this.isAddFormValid = isProductNameValid && isUrlValid;
   }
