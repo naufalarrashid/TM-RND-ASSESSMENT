@@ -128,13 +128,23 @@
             type="url" 
             [(ngModel)]="newProduct.url" 
             name="url"
-            class="form-input" 
-            placeholder="Enter product URL"
+            class="form-input"
+            [class.error]="urlInput.invalid && urlInput.touched"
+            [class.success]="urlInput.valid && urlInput.touched && isValidUrl(newProduct.url)"
+            placeholder="Enter product URL (e.g., https://example.com)"
             required
             #urlInput="ngModel"
+            (input)="validateAddForm()"
           />
-          <div *ngIf="urlInput.invalid && urlInput.touched" class="error-message">
-            Product URL is required
+          <div class="validation-message" *ngIf="urlInput.invalid && urlInput.touched">
+            <span *ngIf="urlInput.errors?.['required']" class="error-text">URL is required</span>
+            <span *ngIf="urlInput.errors?.['url']" class="error-text">Please enter a valid URL</span>
+          </div>
+          <div class="validation-message" *ngIf="urlInput.valid && urlInput.touched && !isValidUrl(newProduct.url)">
+            <span class="error-text">Please enter a valid URL (e.g., https://example.com)</span>
+          </div>
+          <div class="validation-message" *ngIf="urlInput.valid && urlInput.touched && isValidUrl(newProduct.url)">
+            <span class="success-text">✅ Valid URL</span>
           </div>
         </div>
         

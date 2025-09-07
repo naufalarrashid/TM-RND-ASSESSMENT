@@ -249,10 +249,31 @@ export class HomeComponent implements OnInit {
    * Called whenever user types in any input field
    */
   validateAddForm(): void {
-    this.isAddFormValid = !!(this.newProduct.productName && 
-                            this.newProduct.productName.length >= 2 && 
-                            this.newProduct.url && 
-                            this.newProduct.url.length > 0);
+    // Check if product name is valid (minimum 2 characters)
+    const isProductNameValid = this.newProduct.productName && 
+                              this.newProduct.productName.length >= 2;
+    
+    // Check if URL is valid (must be a proper URL format)
+    const isUrlValid = this.newProduct.url && 
+                      this.newProduct.url.length > 0 &&
+                      this.isValidUrl(this.newProduct.url);
+    
+    this.isAddFormValid = isProductNameValid && isUrlValid;
+  }
+
+  /**
+   * Validate if a string is a proper URL format
+   * 
+   * @param url - The URL string to validate
+   * @returns boolean - true if valid URL, false otherwise
+   */
+  public isValidUrl(url: string): boolean {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
