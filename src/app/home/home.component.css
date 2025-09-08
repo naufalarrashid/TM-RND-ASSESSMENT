@@ -714,3 +714,81 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
+
+/* ===== LOGOUT CONFIRMATION MODAL STYLES ===== */
+/* 
+ * Author: Naufal Arrashid
+ * Project: TM R&D Assessment
+ * Description: Styling for logout confirmation modal
+ * Features:
+ * - Centered button layout
+ * - Professional blue gradient for logout button
+ * - Hover and active state animations
+ * - Consistent with overall modal design
+ */
+
+/* Logout confirmation button styling */
+.logout-confirm-button {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  margin-left: 12px; /* Space between Cancel and Logout buttons */
+}
+
+/* Hover effect for logout button */
+.logout-confirm-button:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+/* Active state for logout button */
+.logout-confirm-button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Center the modal body content */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  gap: 16px;
+}
+
+/* Center the warning icon */
+.warning-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+/* Center the modal message */
+.modal-message {
+  text-align: center;
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+/* Center the modal footer buttons */
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+}
+
+/* Ensure cancel button has proper spacing */
+.cancel-button {
+  margin-right: 0; /* Remove any existing margin */
+}

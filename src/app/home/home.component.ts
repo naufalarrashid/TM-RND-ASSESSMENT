@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
   showAddModal: boolean = false;   // Controls Add Product modal visibility
   showEditModal: boolean = false;  // Controls Edit Product modal visibility
   showDeleteModal: boolean = false; // Controls Delete confirmation modal visibility
+  showLogoutModal: boolean = false; // Controls Logout confirmation modal visibility
   productToDelete: Product | null = null; // Product to be deleted
   
   // Form data properties
@@ -176,15 +177,56 @@ export class HomeComponent implements OnInit {
   }
 
   /**
+   * Show logout confirmation modal
+   * 
+   * This method displays a confirmation dialog before logging out
+   * to prevent accidental logouts and inform the user they'll need to login again.
+   * 
+   * Why use confirmation?
+   * - Prevents accidental logouts
+   * - Informs user about consequences
+   * - Provides professional UX
+   * - Consistent with other destructive actions
+   */
+  showLogoutConfirmation(): void {
+    console.log('HomeComponent: Showing logout confirmation...');
+    this.showLogoutModal = true;
+  }
+
+  /**
+   * Close logout confirmation modal
+   * 
+   * This method cancels the logout process and closes the confirmation modal.
+   * User stays logged in and can continue using the application.
+   * 
+   * When is this called?
+   * - User clicks Cancel button
+   * - User clicks outside modal (overlay click)
+   * - User presses Escape key (if implemented)
+   */
+  closeLogoutModal(): void {
+    console.log('HomeComponent: Closing logout confirmation...');
+    this.showLogoutModal = false;
+  }
+
+  /**
    * Handle logout functionality
    * 
-   * This method:
-   * 1. Clears the authentication token from localStorage
-   * 2. Redirects the user back to the login page
-   * 3. Used when user manually logs out or when authentication fails
+   * This method performs the actual logout process after user confirmation.
+   * 
+   * Process:
+   * 1. Close the confirmation modal
+   * 2. Clear the authentication token from localStorage
+   * 3. Redirect the user back to the login page
+   * 
+   * When is this called?
+   * - User confirms logout in the confirmation modal
+   * - Authentication fails and auto-logout is triggered
+   * - Session expires and user needs to re-authenticate
    */
   logout(): void {
     console.log('HomeComponent: Logging out user...');
+    this.showLogoutModal = false; // Close the confirmation modal
     this.authService.logout(); // Clear token from localStorage
     this.router.navigate(['/login']); // Redirect to login page
   }

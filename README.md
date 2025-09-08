@@ -171,21 +171,7 @@ src/
 
 ## 🔧 API Integration
 
-### Authentication Endpoint
-- **URL**: `https://intermediate-test-v-2-web-test.apps.ocp.tmrnd.com.my/api/auth`
-- **Method**: POST
-- **Credentials**: `dummyUser` / `Test@123`
-
-### Product List Endpoint
-- **URL**: `https://intermediate-test-v-2-web-test.apps.ocp.tmrnd.com.my/api/data/productList`
-- **Method**: GET
-- **Authorization**: Bearer token
-
-### Alert Data Endpoint
-- **URL**: `https://intermediate-test-v-2-web-test.apps.ocp.tmrnd.com.my/api/data/alert/list/:id`
-- **Method**: GET
-- **Parameters**: indexNumber, pageSize, startDate, endDate
-- **Data Range**: January 25, 2022 - February 16, 2022
+The application integrates with TM R&D API endpoints for authentication, product data, and alert information. All API configurations are handled securely within the application code.
 
 ## 🚀 Getting Started
 
@@ -248,9 +234,9 @@ ng build --configuration production
 
 #### Step 2: Deploy to Vercel
 1. **Install Vercel CLI:**
-   ```bash
+```bash
    npm install -g vercel
-   ```
+```
 
 2. **Login to Vercel:**
    ```bash
@@ -258,7 +244,7 @@ ng build --configuration production
    ```
 
 3. **Deploy:**
-   ```bash
+```bash
    vercel
    ```
 
@@ -315,11 +301,10 @@ Ctrl+C
 docker-compose down
 ```
 
-#### Step 6: Production Deployment Options
-- **AWS ECS/Fargate:** Upload image to ECR and deploy
-- **Google Cloud Run:** Build and deploy with Cloud Build
-- **Azure Container Instances:** Deploy from Azure Container Registry
-- **Kubernetes:** Use provided docker-compose.yml as reference
+#### Step 6: Container Management
+- **View running containers:** `docker ps`
+- **View container logs:** `docker logs [container-id]`
+- **Stop container:** `Ctrl+C` or `docker-compose down`
 - Test authentication flow
 - Confirm all features work as expected
 
@@ -330,23 +315,17 @@ docker-compose down
 ng test
 ```
 
-### End-to-End Tests
-```bash
-ng e2e
-```
-
-### Code Coverage
-```bash
-ng test --code-coverage
-```
+**Test Coverage:**
+- Authentication service tests
+- Theme service tests  
+- Login component tests
+- Home component tests
 
 ## 📝 Code Quality
 
 - **Comments**: Comprehensive inline documentation
 - **TypeScript**: Strict type checking enabled
-- **ESLint**: Code linting and formatting
 - **Responsive Design**: Mobile-first approach
-- **Accessibility**: ARIA labels and keyboard navigation
 - **Performance**: Lazy loading and optimized bundles
 
 ## 🎨 Design Philosophy

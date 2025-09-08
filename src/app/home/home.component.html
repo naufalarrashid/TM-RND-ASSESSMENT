@@ -6,7 +6,8 @@
       <div class="user-actions">
         <app-theme-toggle></app-theme-toggle>
         <span class="welcome-text">Welcome, {{ currentUser }}!</span>
-        <button class="logout-button" (click)="logout()">
+        <!-- Logout Button with Confirmation -->
+        <button class="logout-button" (click)="showLogoutConfirmation()">
           <span class="logout-icon">🚪</span>
           Logout
         </button>
@@ -259,6 +260,53 @@
         (click)="confirmDeleteProduct()"
       >
         Delete
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGOUT CONFIRMATION MODAL ===== -->
+<!-- 
+  Author: Naufal Arrashid
+  Project: TM R&D Assessment
+  Description: Confirmation dialog for logout action
+  Features:
+  - Prevents accidental logouts
+  - Clear warning message about consequences
+  - Centered button layout
+  - Click outside to cancel
+  - Professional modal design
+-->
+<div *ngIf="showLogoutModal" class="modal-overlay" (click)="closeLogoutModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <h3 class="modal-title">Confirm Logout</h3>
+    </div>
+    
+    <!-- Modal Body with Warning -->
+    <div class="modal-body">
+      <div class="warning-icon">⚠️</div>
+      <p class="modal-message">
+        Are you sure you want to logout? You will need to login again to access the application.
+      </p>
+    </div>
+    
+    <!-- Modal Footer with Centered Buttons -->
+    <div class="modal-footer">
+      <button 
+        type="button" 
+        class="cancel-button"
+        (click)="closeLogoutModal()"
+      >
+        Cancel
+      </button>
+      <button 
+        type="button" 
+        class="logout-confirm-button"
+        (click)="logout()"
+      >
+        Logout
       </button>
     </div>
   </div>
