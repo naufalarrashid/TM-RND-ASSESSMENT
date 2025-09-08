@@ -1,0 +1,265 @@
+<div class="home-container">
+  <!-- Header Section -->
+  <header class="home-header">
+    <div class="header-content">
+      <h1 class="page-title">Product List</h1>
+      <div class="user-actions">
+        <app-theme-toggle></app-theme-toggle>
+        <span class="welcome-text">Welcome, {{ currentUser }}!</span>
+        <button class="logout-button" (click)="logout()">
+          <span class="logout-icon">🚪</span>
+          Logout
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="home-main">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">Loading products...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="errorMessage && !isLoading" class="error-container">
+      <div class="error-icon">⚠️</div>
+      <p class="error-message">{{ errorMessage }}</p>
+      <button class="retry-button" (click)="refreshProducts()">
+        <span class="retry-icon">🔄</span>
+        Try Again
+      </button>
+    </div>
+
+    <!-- Product Table -->
+    <div *ngIf="!isLoading && !errorMessage" class="table-container">
+      <div class="table-header">
+        <h2 class="table-title">Products ({{ products.length }})</h2>
+        <div class="header-actions">
+          <button class="add-product-button" (click)="openAddProductModal()">
+            <span class="add-icon">➕</span>
+            Add Product
+          </button>
+        
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-wrapper">
+        <table class="products-table">
+          <thead>
+            <tr>
+              <th class="product-column">Product</th>
+              <th class="action-column">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products; trackBy: trackByProductId" class="product-row">
+              <td class="product-cell">
+                <a 
+                  class="product-link" 
+                  (click)="navigateToDetail(product.id)"
+                  [title]="'View details for ' + product.productName"
+                >
+                  {{ product.productName }}
+                </a>
+              </td>
+              <td class="action-cell">
+                <button 
+                  class="edit-button" 
+                  (click)="openEditProductModal(product)"
+                  [title]="'Edit ' + product.productName"
+                >
+                  <span class="edit-icon">✏️</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Empty State -->
+        <div *ngIf="products.length === 0" class="empty-state">
+          <div class="empty-icon">📦</div>
+          <p class="empty-message">No products found</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Add Product Modal -->
+  <div *ngIf="showAddModal" class="modal-overlay" (click)="closeAddProductModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Product</h3>
+        <button class="modal-close" (click)="closeAddProductModal()">×</button>
+      </div>
+      
+      <form class="modal-form" (ngSubmit)="addProduct()" #addForm="ngForm">
+        <div class="form-group">
+          <label for="addProductName" class="form-label">Product *</label>
+          <input 
+            id="addProductName"
+            type="text" 
+            [(ngModel)]="newProduct.productName" 
+            name="productName"
+            class="form-input" 
+            [class.error]="productNameInput.invalid && productNameInput.touched"
+            [class.success]="productNameInput.valid && productNameInput.touched"
+            placeholder="Enter product name"
+            required
+            minlength="2"
+            #productNameInput="ngModel"
+            (input)="validateAddForm()"
+          />
+          <div class="validation-message" *ngIf="productNameInput.invalid && productNameInput.touched">
+            <span *ngIf="productNameInput.errors?.['required']" class="error-text">Product name is required</span>
+            <span *ngIf="productNameInput.errors?.['minlength']" class="error-text">Product name must be at least 2 characters</span>
+          </div>
+          <div class="validation-message" *ngIf="productNameInput.valid && productNameInput.touched">
+            <span class="success-text">✅ Product name looks good</span>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="addProductUrl" class="form-label">Address *</label>
+          <input 
+            id="addProductUrl"
+            type="url" 
+            [(ngModel)]="newProduct.url" 
+            name="url"
+            class="form-input"
+            [class.error]="urlInput.invalid && urlInput.touched"
+            [class.success]="urlInput.valid && urlInput.touched && isValidUrl(newProduct.url)"
+            placeholder="Enter product URL (e.g., https://example.com)"
+            required
+            #urlInput="ngModel"
+            (input)="validateAddForm()"
+          />
+          <div class="validation-message" *ngIf="urlInput.invalid && urlInput.touched">
+            <span *ngIf="urlInput.errors?.['required']" class="error-text">URL is required</span>
+            <span *ngIf="urlInput.errors?.['url']" class="error-text">Please enter a valid URL</span>
+          </div>
+          <div class="validation-message" *ngIf="urlInput.valid && urlInput.touched && !isValidUrl(newProduct.url)">
+            <span class="error-text">Please enter a valid URL (e.g., https://example.com)</span>
+          </div>
+          <div class="validation-message" *ngIf="urlInput.valid && urlInput.touched && isValidUrl(newProduct.url)">
+            <span class="success-text">✅ Valid URL</span>
+          </div>
+        </div>
+        
+        <div class="modal-actions">
+          <button 
+            type="submit" 
+            class="submit-button"
+            [disabled]="addForm.invalid"
+            [class.disabled]="addForm.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div *ngIf="showEditModal" class="modal-overlay" (click)="closeEditProductModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Product</h3>
+        <button class="modal-close" (click)="closeEditProductModal()">×</button>
+      </div>
+      
+      <form class="modal-form" (ngSubmit)="updateProduct()" #editForm="ngForm">
+        <div class="form-group">
+          <label for="editProductName" class="form-label">Product *</label>
+          <input 
+            id="editProductName"
+            type="text" 
+            [(ngModel)]="editingProduct.productName" 
+            name="productName"
+            class="form-input" 
+            placeholder="Enter product name"
+            required
+            #editProductNameInput="ngModel"
+          />
+          <div *ngIf="editProductNameInput.invalid && editProductNameInput.touched" class="error-message">
+            Product name is required
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="editProductUrl" class="form-label">Address *</label>
+          <input 
+            id="editProductUrl"
+            type="url" 
+            [(ngModel)]="editingProduct.url" 
+            name="url"
+            class="form-input" 
+            placeholder="Enter product URL"
+            required
+            #editUrlInput="ngModel"
+          />
+          <div *ngIf="editUrlInput.invalid && editUrlInput.touched" class="error-message">
+            Product URL is required
+          </div>
+        </div>
+        
+        <div class="modal-actions">
+          <button 
+            type="button" 
+            class="remove-button"
+            (click)="openDeleteModal(editingProduct)"
+          >
+            Remove
+          </button>
+          <button 
+            type="submit" 
+            class="update-button"
+            [disabled]="editForm.invalid"
+            [class.disabled]="editForm.invalid"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div *ngIf="showDeleteModal" class="modal-overlay" (click)="closeDeleteModal()">
+  <div class="modal-content delete-modal" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Confirm Delete</h3>
+      <button class="modal-close" (click)="closeDeleteModal()">×</button>
+    </div>
+    
+    <div class="modal-body">
+      <div class="delete-warning">
+        <div class="warning-icon">⚠️</div>
+        <p class="warning-message">
+          Are you sure you want to delete <strong>{{ productToDelete?.productName }}</strong>?
+        </p>
+        <p class="warning-subtitle">This action cannot be undone.</p>
+      </div>
+    </div>
+    
+    <div class="modal-actions">
+      <button 
+        type="button" 
+        class="cancel-button"
+        (click)="closeDeleteModal()"
+      >
+        Cancel
+      </button>
+      <button 
+        type="button" 
+        class="delete-button"
+        (click)="confirmDeleteProduct()"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
