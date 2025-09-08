@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
     // Step 2: Set up user information
     // In a real app, this would come from the authentication response
-    this.currentUser = 'Evaluator';
+    this.currentUser = 'Drs and Evaluator';
     
     // Step 3: Load the product list from the API
     this.loadProducts();
