@@ -104,21 +104,22 @@ This is a comprehensive Angular application developed for the TM R&D Assessment,
 
 ---
 
-## 📊 **Assessment Value Breakdown**
+## 📊 **Feature Implementation Overview**
 
-### **Core Requirements** *(70-80% of grade)*
-- 🔐 **Authentication System** - 20%
-- 🏠 **Product Management** - 20%
-- 📊 **Detail Page with Alerts** - 15%
-- 🛠️ **Technical Implementation** - 15%
-- 📱 **Basic UI/UX** - 10%
+### **Core Requirements**
+- 🔐 **Authentication System** - JWT-based secure login
+- 🏠 **Product Management** - CRUD operations with API integration
+- 📊 **Detail Page with Alerts** - Data visualization with filtering
+- 🛠️ **Technical Implementation** - Angular 18+ with modern practices
+- 📱 **Basic UI/UX** - Responsive design and user experience
 
-### **Bonus Features** *(20-30% of grade)*
-- 🧪 **Unit Testing** - 10%
-- 🎨 **Dark Mode Theme** - 5%
-- ✨ **Enhanced UI/UX** - 5%
-- ✅ **Real-time Validation** - 5%
-- 🗑️ **Confirmation Dialogs** - 5%
+### **Additional Features**
+- 🧪 **Unit Testing** - Comprehensive test coverage
+- 🎨 **Dark Mode Theme** - Light/dark mode toggle
+- ✨ **Enhanced UI/UX** - Professional styling and animations
+- ✅ **Real-time Validation** - Live form validation
+- 🗑️ **Confirmation Dialogs** - User-friendly confirmations
+- 🐳 **Containerization** - Docker deployment ready
 
 ---
 
@@ -226,19 +227,26 @@ docker-compose up
 
 **Access the containerized application at:** `http://localhost:3000`
 
-## 🌐 Deployment Guide
+## 🚀 **Deployment Guide**
 
-### Live Demo
+### 🌐 **Live Demo**
+
 **Demo URL**: [https://tm-rnd-assessment.vercel.app](https://tm-rnd-assessment.vercel.app)
 
-### Deployment Steps
+*This public demo allows you to test the application without any setup.*
 
-#### 1. Build the Application
+### 📋 **How to Deploy to Vercel (Public Demo)**
+
+#### Prerequisites
+- Node.js installed
+- Vercel account (free)
+
+#### Step 1: Build the Application
 ```bash
 ng build --configuration production
 ```
 
-#### 2. Deploy to Vercel
+#### Step 2: Deploy to Vercel
 1. **Install Vercel CLI:**
    ```bash
    npm install -g vercel
@@ -260,13 +268,58 @@ ng build --configuration production
    - **Output Directory:** `dist/tm-rnd-assessment/browser`
    - **Install Command:** `npm install`
 
-#### 3. Environment Configuration
-- No environment variables required
-- API endpoints are configured in the application code
-- CORS is handled by the TM R&D API endpoints
+#### Step 3: Verify Public Demo
+- Visit the Vercel URL
+- Test authentication flow
+- Confirm all features work
+- Share URL as needed
 
-#### 4. Post-Deployment
-- Verify the application loads correctly
+### 🐳 **Docker Containerization (Bonus Feature)**
+
+*This demonstrates containerization skills and provides additional deployment options.*
+
+#### Prerequisites
+- Docker Desktop installed and running
+- Access to the GitLab repository
+
+#### Step 1: Access the Repository
+- The repository is already available in your GitLab account
+- Navigate to the project directory
+- Ensure you're in the root directory containing the Dockerfile
+
+#### Step 2: Build Docker Image
+```bash
+docker build -t tm-rnd-assessment .
+```
+
+#### Step 3: Run Container Locally
+```bash
+# Option A: Direct Docker run
+docker run -p 3000:80 tm-rnd-assessment
+
+# Option B: Using Docker Compose (recommended)
+docker-compose up
+```
+
+#### Step 4: Access the Application
+- **Local URL:** http://localhost:3000
+- **Container Status:** Check with `docker ps`
+- **Container Logs:** `docker logs [container-id]`
+
+#### Step 5: Stop the Container
+```bash
+# If running with docker run
+Ctrl+C
+
+# If running with docker-compose
+docker-compose down
+```
+
+#### Step 6: Production Deployment Options
+- **AWS ECS/Fargate:** Upload image to ECR and deploy
+- **Google Cloud Run:** Build and deploy with Cloud Build
+- **Azure Container Instances:** Deploy from Azure Container Registry
+- **Kubernetes:** Use provided docker-compose.yml as reference
 - Test authentication flow
 - Confirm all features work as expected
 
