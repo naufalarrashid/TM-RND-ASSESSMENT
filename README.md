@@ -88,6 +88,13 @@ This is a comprehensive Angular application developed for the TM R&D Assessment,
 - 📝 Login component tests
 - 🏠 Home component tests
 
+### 🐳 **Containerization** *(Bonus)*
+- 🐳 Docker containerization with multi-stage build
+- 📦 Production-ready container image
+- 🚀 Easy deployment to cloud platforms
+- 🔧 Docker Compose configuration
+- 📋 Comprehensive Docker documentation
+
 ### 🔍 **Advanced Features** *(Bonus)*
 - 📊 Data transformation utilities
 - 🎯 Dynamic field mapping for API responses
@@ -204,6 +211,20 @@ Navigate to `http://localhost:4200/`
 ```bash
 ng build --configuration production
 ```
+
+### Docker Containerization
+```bash
+# Build Docker image
+docker build -t tm-rnd-assessment .
+
+# Run container locally
+docker run -p 3000:80 tm-rnd-assessment
+
+# Run with Docker Compose
+docker-compose up
+```
+
+**Access the containerized application at:** `http://localhost:3000`
 
 ## 🌐 Deployment Guide
 

@@ -1,8 +1,22 @@
-﻿node_modules
+﻿# ===== TM R&D ASSESSMENT - DOCKER IGNORE CONFIGURATION =====
+# Author: Naufal Arrashid
+# Project: TM R&D Assessment
+# Description: Files and directories to exclude from Docker build context
+
+# Dependencies (will be installed during build)
+node_modules
+
+# Build output (will be generated during build)
 dist
+
+# Version control files
 .git
 .gitignore
+
+# Documentation files
 README.md
+
+# Docker configuration files (not needed in container)
 Dockerfile
 docker-compose.yml
 .dockerignore

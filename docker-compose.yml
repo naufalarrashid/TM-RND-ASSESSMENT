@@ -1,9 +1,25 @@
-﻿version: '3.8'
+﻿# ===== TM R&D ASSESSMENT - DOCKER COMPOSE CONFIGURATION =====
+# Author: Naufal Arrashid
+# Project: TM R&D Assessment
+# Description: Docker Compose configuration for easy container orchestration
+
+version: '3.8'
+
 services:
+  # Main Angular application service
   tm-rnd-assessment:
+    # Build the container from the current directory (Dockerfile)
     build: .
+    
+    # Port mapping: host port 3000 -> container port 80
+    # Access the application at http://localhost:3000
     ports:
       - "3000:80"
+    
+    # Environment variables for production deployment
     environment:
       - NODE_ENV=production
+    
+    # Restart policy: restart container unless manually stopped
+    # This ensures the application stays running even after system reboots
     restart: unless-stopped
